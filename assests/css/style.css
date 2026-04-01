@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 25s linear infinite;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+
+/* ─── WhatsApp Float ─── */
+:root {
+  --wa-green: #25D366;
+  --wa-dark: #128C7E;
+  --wa-bubble: #ffffff;
+  --wa-shadow: rgba(37, 211, 102, 0.45);
+  --radius: 16px;
+}
+
+.wa-wrap {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* Tooltip bubble */
+.wa-tooltip {
+  background: var(--wa-bubble);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .14);
+  max-width: 240px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: .85rem;
+  line-height: 1.5;
+  color: #111;
+  position: relative;
+  pointer-events: none;
+
+  /* hidden by default */
+  opacity: 0;
+  transform: translateY(8px) scale(.97);
+  transform-origin: bottom right;
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
+}
+
+/* little triangle pointing down-right */
+.wa-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 22px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 9px solid var(--wa-bubble);
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .08));
+}
+
+.wa-tooltip strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: .9rem;
+  color: var(--wa-dark);
+}
+
+/* Main button */
+.wa-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--wa-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow:
+    0 4px 18px var(--wa-shadow),
+    0 2px 6px rgba(0, 0, 0, .15);
+  transition:
+    transform .22s cubic-bezier(.34, 1.56, .64, 1),
+    box-shadow .22s ease;
+
+  /* pulse ring */
+  position: relative;
+}
+
+/* Pulse animation */
+.wa-btn::before {
+  content: '';
+  position: absolute;
+  top:20px;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--wa-green);
+  opacity: .35;
+  animation: pulse 2.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: .35;
+  }
+
+  70% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+.wa-btn svg {
+  width: 32px;
+  height: 32px;
+  fill: #fff;
+  position: relative;
+  /* above ::before */
+  z-index: 1;
+  transition: transform .22s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+/* Hover state */
+.wa-wrap:hover .wa-tooltip {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.wa-btn:hover {
+  transform: scale(1.12);
+  box-shadow:
+    0 8px 28px var(--wa-shadow),
+    0 4px 10px rgba(0, 0, 0, .18);
+}
+
+.wa-btn:hover svg {
+  transform: rotate(-8deg) scale(1.1);
+}
+
+.wa-btn:active {
+  transform: scale(1.04);
+}
