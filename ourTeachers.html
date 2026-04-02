@@ -150,6 +150,84 @@ Meet the dedicated educators who inspire and guide our students every day.
 
 </section>
 
+
+    <script>
+
+        const openMenu = document.getElementById("openMenu");
+        const closeMenu = document.getElementById("closeMenu");
+        const menu = document.getElementById("menu");
+        const overlay = document.getElementById("navOverlay");
+
+        const aboutBtn = document.querySelector("#aboutMenu button");
+        const aboutDropdown = document.getElementById("aboutDropdown");
+
+
+        // OPEN MOBILE MENU
+
+        openMenu.addEventListener("click", (e) => {
+
+            menu.style.width = "75%";
+
+            overlay.classList.remove("hidden");
+
+            e.stopPropagation();
+
+        });
+
+
+        // CLOSE MENU BUTTON
+
+        closeMenu.addEventListener("click", () => {
+
+            menu.style.width = "0";
+
+            overlay.classList.add("hidden");
+
+        });
+
+
+        // CLICK OUTSIDE CLOSE
+
+        overlay.addEventListener("click", () => {
+
+            menu.style.width = "0";
+
+            overlay.classList.add("hidden");
+
+        });
+
+
+        // ABOUT DROPDOWN CLICK
+
+        aboutBtn.addEventListener("click", (e) => {
+
+            e.stopPropagation();
+
+            aboutDropdown.classList.remove("hidden");
+
+            setTimeout(() => {
+
+                aboutDropdown.classList.add("hidden");
+
+            }, 2000);
+
+        });
+
+
+        // CLOSE DROPDOWN OUTSIDE
+
+        document.addEventListener("click", (e) => {
+
+            if (!aboutDropdown.contains(e.target) && !aboutBtn.contains(e.target)) {
+
+                aboutDropdown.classList.add("hidden");
+
+            }
+
+        });
+
+    </script>
+
 <!-- TEACHERS -->
 
 <section class="px-6 md:px-16 py-20 bg-gray-50">
